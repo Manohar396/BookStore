@@ -27,8 +27,27 @@ def validateLibrarianDetails(userName, pswd):
         getLoginDetails()
 
 
-def booksTransactions(connection):
+def selectTransactionType(connection):
     print("---Book Store Transactions---")
+    print("1. Books Transaction")
+    print("2. Customers Transaction")
+    print("3. Sign-out")
+
+    transactionTypeChoice = input("Enter Your Choice: ")
+
+    if transactionTypeChoice == "1":
+        booksTransactions(connection)
+    elif transactionTypeChoice == "2":
+        print("Development In Progress")
+    elif transactionTypeChoice == "3":
+        print("Signed-out Successfully!!!")
+    else:
+        print("Invalid Choice!!!")
+        selectTransactionType()
+
+
+def booksTransactions(connection):
+    print("---Book Transactions---")
     print("1. Add New Book")
     print("2. Update Book Details")
     print("3. List All Books")
@@ -50,7 +69,7 @@ def booksTransactions(connection):
         Books.addBooks(connection, bookName, authorName, noOfCopies, booksAvailable, booksIssued)
         booksTransactions(connection)
     elif choice2 == "7":
-        print("")
+        selectTransactionType(connection)
     else:
         print("Enter Valid Choice!!!")
         booksTransactions(connection)
@@ -65,6 +84,6 @@ if __name__ == "__main__":
     sqlConnection = Connection.sqlConnection(host, database, username, password)
 
     getLoginDetails()
-    booksTransactions(sqlConnection)
+    selectTransactionType(sqlConnection)
 
     Connection.sqlConnectionClose(sqlConnection)
