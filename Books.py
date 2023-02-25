@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def createTableBooks(connection):
     # connection = mysql.connector.connect(host='localhost', database='books', user='root', password='manu')
 
@@ -41,13 +42,41 @@ def deleteBooks(connection):
     print(deleteBookQuery.rowcount, "Records Deleted!")
 
 
-def updateBook(connection):
+def updateBookName(connection, bookID, bookName):
     # connection = mysql.connector.connect(host='localhost', database='books', user='root', password='manu')
 
     updateBookQuery = connection.cursor()
 
-    bookname = 'James Gosling Java'
-    sql = "UPDATE Books SET BookName = '" + bookname + "'WHERE BookID =" + "1"
+    # bookname = 'James Gosling Java'
+    sql = "UPDATE Books SET BookName = '" + bookName + "'WHERE BookID =" + bookID
+
+    updateBookQuery.execute(sql)
+    connection.commit()
+
+    print(updateBookQuery.rowcount, "Book Updated Successfully!!")
+
+
+def updateAuthorName(connection, bookID, authorName):
+    # connection = mysql.connector.connect(host='localhost', database='books', user='root', password='manu')
+
+    updateBookQuery = connection.cursor()
+
+    # bookname = 'James Gosling Java'
+    sql = "UPDATE Books SET AuthorName = '" + authorName + "'WHERE BookID =" + bookID
+
+    updateBookQuery.execute(sql)
+    connection.commit()
+
+    print(updateBookQuery.rowcount, "Book Updated Successfully!!")
+
+
+def updateNoOfCopies(connection, bookID, noOfCopies):
+    # connection = mysql.connector.connect(host='localhost', database='books', user='root', password='manu')
+
+    updateBookQuery = connection.cursor()
+
+    # bookname = 'James Gosling Java'
+    sql = "UPDATE Books SET NoOfCopies = '" + noOfCopies + "'WHERE BookID =" + bookID
 
     updateBookQuery.execute(sql)
     connection.commit()

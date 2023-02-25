@@ -2,6 +2,7 @@ import Connection
 import Books
 import os
 
+
 def getLoginDetails():
     os.system('cls')
     print("---Welcome to VMR Books Store---")
@@ -28,6 +29,7 @@ def validateLibrarianDetails(userName, pswd):
 
 
 def selectTransactionType(connection):
+    os.system('cls')
     print("---Book Store Transactions---")
     print("1. Books Transaction")
     print("2. Customers Transaction")
@@ -47,6 +49,7 @@ def selectTransactionType(connection):
 
 
 def booksTransactions(connection):
+    os.system('cls')
     print("---Book Transactions---")
     print("1. Add New Book")
     print("2. Update Book Details")
@@ -68,6 +71,39 @@ def booksTransactions(connection):
 
         Books.addBooks(connection, bookName, authorName, noOfCopies, booksAvailable, booksIssued)
         booksTransactions(connection)
+
+    elif choice2 == "2":
+        print("---Updating Book Details---")
+        bookID = input("Enter Book ID: ")
+
+        print("---Update Transactions---")
+        print("1. Update Book Name")
+        print("2. Update Author Name")
+        print("3. Updating Total Copies: ")
+        print("4. Exit")
+        updateBookChoice = input("Enter Your Choice: ")
+
+        if updateBookChoice == "1":
+            print("---Updating Book Name---")
+            bookName = input("Enter Book Name: ")
+            Books.updateBookName(connection, bookID, bookName)
+            booksTransactions(connection)
+        elif updateBookChoice == "2":
+            print("---Updating Author Name---")
+            authorName = input("Enter Author Name: ")
+            Books.updateAuthorName(connection, bookID, authorName)
+            booksTransactions(connection)
+        elif updateBookChoice == "3":
+            print("---Updating Total Copies---")
+            noOfCopies = input("Enter Total Copies: ")
+            Books.updateNoOfCopies(connection, bookID, noOfCopies)
+            booksTransactions(connection)
+        elif updateBookChoice == "4":
+            booksTransactions(connection)
+        else:
+            print("Entered Invalid Choice!!!")
+            booksTransactions(connection)
+
     elif choice2 == "7":
         selectTransactionType(connection)
     else:
